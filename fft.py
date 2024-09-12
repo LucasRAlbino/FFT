@@ -44,14 +44,15 @@ def fft_butterfly(x):
                 
                 w *= w_m  # Atualiza o fator de ajuste para o próximo par
 
-# Número de pontos (potência de 2 para a FFT)
-N = 64
+# Criando o sinal: cos(2*pi*n/10)
+N = 128  # Número de pontos (potência de 2 para a FFT)
 
-# Vetor de índices discretos
-n = np.arange(N)
+n = np.arange(N)  # Vetor de índices
 
-# Criando um sinal tipo porta
-largura = 50
+#sinal = np.cos(2 * np.pi * n / 10)  # Sinal cos(2*pi*n/10)
+
+largura = 50  
+
 sinal = np.where((n >= (N//2 - largura//2)) & (n < (N//2 + largura//2)), 1, 0)
 
 # Convertendo o sinal para formato complexo para aplicar a FFT
