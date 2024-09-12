@@ -3,10 +3,6 @@ import cmath
 import matplotlib.pyplot as plt
 import numpy as np
 
-"""
-A função bit_reversal_permutation, garante que os dados estejam na ordem correta antes de começar a aplicação das operações de borboleta. 
-"""
-
 def bit_reversal_permutation(x):
     """Reorganiza os índices em ordem de bit-reversal."""
     N = len(x)
@@ -48,16 +44,15 @@ def fft_butterfly(x):
                 
                 w *= w_m  # Atualiza o fator de ajuste para o próximo par
 
-# Criando o sinal: cos(2*pi*n/10)
-N = 1024  # Número de pontos (potência de 2 para a FFT)
+# Número de pontos (potência de 2 para a FFT)
+N = 64
 
-n = np.arange(N)  # Vetor de índices
+# Vetor de índices discretos
+n = np.arange(N)
 
-sinal = np.cos(2 * np.pi * n / 10)  # Sinal cos(2*pi*n/10)
-
-#largura = 50  
-
-#sinal = np.where((n >= (N//2 - largura//2)) & (n < (N//2 + largura//2)), 1, 0)
+# Criando um sinal tipo porta
+largura = 50
+sinal = np.where((n >= (N//2 - largura//2)) & (n < (N//2 + largura//2)), 1, 0)
 
 # Convertendo o sinal para formato complexo para aplicar a FFT
 entrada = [complex(val, 0) for val in sinal]
@@ -71,25 +66,23 @@ magnitude = np.abs(entrada)
 # Calculando manualmente as frequências
 frequencias = [(i if i < N//2 else i - N) for i in range(N)]  # Frequências simétricas
 
-# Plotando o sinal no domínio do tempo
+
 plt.figure(figsize=(14, 6))
 
 plt.subplot(2, 1, 1)
-plt.plot(n, sinal, label='Sinal no Domínio do Tempo')
+plt.stem(n, sinal, linefmt='-', markerfmt='o', basefmt=" ", use_line_collection=True)
 plt.xlabel('Amostras')
 plt.ylabel('Amplitude')
 plt.title('Sinal no Domínio do Tempo')
 plt.grid(True)
-plt.legend()
 
-# Plotando a FFT no domínio da frequência
+
 plt.subplot(2, 1, 2)
-plt.plot(frequencias, magnitude, label='Magnitude da FFT')  # Mostra todas as frequências, positivas e negativas
+plt.stem(frequencias, magnitude, linefmt='-', markerfmt='o', basefmt=" ", use_line_collection=True)
 plt.xlabel('Frequência [Índices]')
 plt.ylabel('Magnitude')
-plt.title('FFT')
+plt.title('FFT no Domínio da Frequência')
 plt.grid(True)
-plt.legend()
 
 plt.tight_layout()
 plt.show()
