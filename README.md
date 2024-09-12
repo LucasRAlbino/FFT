@@ -1,4 +1,4 @@
-# FFT com o Método da Borboleta
+# FFT
 
 Este projeto implementa a Transformada Rápida de Fourier (FFT) usando o método da borboleta em Python. A FFT é uma técnica fundamental em processamento de sinais, análise de frequências e muitas outras aplicações em ciência e engenharia.
 
